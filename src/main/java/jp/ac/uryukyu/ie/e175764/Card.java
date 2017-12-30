@@ -1,7 +1,7 @@
 package jp.ac.uryukyu.ie.e175764;
 
 public class Card {
-    static String[] make_cards(int Jok){//Jokはjokerの枚数
+    public static String[] make_cards(int Jok){//Jokはjokerの枚数
         String[] card;
         int k=0;
         card=new String[52+Jok];
