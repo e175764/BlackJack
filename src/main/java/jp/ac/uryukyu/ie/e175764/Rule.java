@@ -6,26 +6,35 @@ import java.util.Collections;
 import java.util.List;
 public class Rule {
     Player p1 = new Player();
-
+    String[] deck;
     public String[] Shuffle(String[] card) {
         List<String> cards = new LinkedList<>(Arrays.asList(card));
         Collections.shuffle(cards);
-        String[] deck = cards.toArray(new String[cards.size()]);
+        deck = cards.toArray(new String[cards.size()]);
         return deck;
     }
 
-    public void deal(String[] deck) {
-        for (int i = 0; i < 2; i++) {
-            p1.Player(deck[i]);
-            List<String> cards = new LinkedList<>(Arrays.asList(deck));
-            cards.remove(i);
-            deck = cards.toArray(new String[cards.size()]);
+    public String[] deal(String[] hands) {
+        int i=0;
+        while(deck[i]==null){
+            i++;
         }
+        p1.Player(deck[i],hands);
+        List<String> hand = new LinkedList<>(Arrays.asList(hands));
+        hand.add(deck[i]);
+        hands = hand.toArray(new String[hand.size()]);
+        List<String> cards = new LinkedList<>(Arrays.asList(deck));
+        cards.remove(i);
+        deck = cards.toArray(new String[cards.size()]);
+        return hands;
     }
 
-    public int Total(int card) {
-        int total = 0;
-        total += card;
+    public int Total(String[] hands) {
+        int total=0;
+        for(int i=0;i<hands.length;i++){
+            String hand =hands[i].replaceAll("[^0-9]", "");//手札1枚目(数字データのみ)
+            total+=Integer.parseInt(hand);
+        }
         return total;
     }
 
