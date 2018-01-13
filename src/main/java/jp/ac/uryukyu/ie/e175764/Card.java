@@ -1,4 +1,4 @@
-package jp.ac.uryukyu.ie.e175764;
+package jp.ac.uryukyu.ie.e175745;
 
 public class Card {
     public static String[] make_cards(){
