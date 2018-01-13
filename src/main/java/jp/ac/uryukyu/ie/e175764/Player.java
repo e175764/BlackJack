@@ -1,17 +1,23 @@
 package jp.ac.uryukyu.ie.e175764;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Scanner;
 public class Player {
-    public void Player(String card_1,String card_2){
-        System.out.println("Your hand:/n"+card_1+"/n"+card_2);
-        String hand_1 = card_1.replaceAll("[^0-9]", "");//手札1枚目(数字データのみ)
+    public void Player(String card){
+        String[] hands ={};
+        List<String> cards = new LinkedList<>(Arrays.asList(hands));
+        cards.add(card);
+        System.out.println("Your hand:/n"+card);
+        String hand_1 = card.replaceAll("[^0-9]", "");//手札1枚目(数字データのみ)
         int num_1 = Integer.parseInt(hand_1);  //int型にcast
-        String hand_2 = card_2.replaceAll("[^0-9]", "");//2枚目(数字データのみ)
-        int num_2 = Integer.parseInt(hand_2);  //int型にcast
-        String s = String.valueOf(num_1+num_2);
-        System.out.println("Total value of your hands:"+s);
-        System.out.println("If you want more card, please input 1.");
-        System.out.println("(If not, please input 0.)");
 
+        if(hands.length>=2) {
+            String s = String.valueOf(num_1);
+            System.out.println("Total value of your hands:" + s);
+            System.out.println("If you want more card, please input 1.");
+            System.out.println("(If not, please input 0.)");
+        }
 
     }
 }
