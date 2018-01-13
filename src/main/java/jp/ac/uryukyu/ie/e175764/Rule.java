@@ -18,4 +18,5 @@ public class Rule {
                 p1.Player(deck[i],deck[52-i]);
         }
     }
+    public 
 }
