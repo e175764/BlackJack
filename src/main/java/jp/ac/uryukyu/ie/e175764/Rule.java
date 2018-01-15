@@ -9,9 +9,12 @@ public class Rule {
     public void Rule(String[] deck){
         this.deck=deck;
     }
-    /*Shuffle:
-     *String型配列cardを引数として受け取る。
-     *それを一旦、List型に変換し、shuffleメソッドを呼び出す。*/
+     /* Shuffle:
+     * 引数としてString型配列を受け取る。
+     * それを一旦、List型に変換し、shuffleメソッドを呼び出す。
+     * shuffleしたものをString型配列に戻す。
+     * String型配列を返す。
+     * トランプのデッキをシャッフルするためのメソッド*/
     public String[] Shuffle(String[] card) {
         List<String> cards = new LinkedList<>(Arrays.asList(card));
         Collections.shuffle(cards);
@@ -19,6 +22,13 @@ public class Rule {
         return deck;
     }
 
+     /* deal:
+     * 引数としてPlayerクラス型変数,String型配列の2つを受け取る。
+     * playerは手札を配る相手を指定(Dealer,Player)している。
+     * handsは配る人の手札を表している。
+     * deckからランダムに1枚を取り出してhandsに追加する。
+     * handsを戻り値を返す。
+     * 手札を配るためのメソッド。*/
     public String[] deal(Player player,String[] hands) {
         Random ran =new Random();
         int i = ran.nextInt(30);
@@ -33,6 +43,10 @@ public class Rule {
         return hands;
     }
 
+    /*hit:
+    * 引数は取らない。
+    * deckからランダムに1枚取り出す。
+    * 戻り値として返す。*/
      public String hit() {
         Random ran =new Random();
         int i = ran.nextInt(30);
@@ -42,6 +56,13 @@ public class Rule {
         return deck[i];
     }
 
+    /*Total:
+    * 引数としてString型配列をとる。
+    * handsにはプレイヤーあるいはディーラーの手札を渡す。
+    * 受け取った手札の1枚ずつを、数字部分だけを取り出してint型にcastする。
+    * 数字部分が11以上の場合には10としてカウントする。
+    * 1(Ace)の場合には11か1かを任意で決定できるようにする。
+    * 手札の合計値を計算して戻り値として返す。*/
     public int Total(String[] hands) {
         int total=0;
         for(int i=0;i<hands.length;i++){
@@ -52,7 +73,7 @@ public class Rule {
             }else if(card==1){
                 if(Global.Ace){
                     card = 11;
-                }else if(!Global.Ace) {
+                }else {
                     card = 1;
                 }
             }
@@ -62,6 +83,11 @@ public class Rule {
         return total;
     }
 
+    /*Judge:
+    * 引数としてint型を2つとる。
+    * p_totalにはプレイヤーのトータルを,d_totalにはディーラーの手札を渡す。
+    * それらの21との差分の大小を比較し勝敗判定をする。
+    * d_totalが21を超えた場合(バースト)には無条件でプレイヤーが勝利。*/
     public void Judge(int p_total,int d_total){
         int p_diff = 0;
         int d_diff = 0;
@@ -72,20 +98,28 @@ public class Rule {
         if (p_total>21 && d_total>21){
             System.out.println("you win!\nAs luck would have it.");
         }else if(p_total>21){
-            System.out.println("you lose,,\nIs there also such a day.");
+            System.out.println("you lose,,\nRainy days never stay.");
         }else if(d_total>21){
             System.out.println("you win!\nAs luck would have it.");
         }else{
             if (d_diff > p_diff){
                 System.out.println("you win!\nAs luck would have it.");
             }else if (p_diff > d_diff){
-                System.out.println("you lose,,\nIs there also such a day.");
+                System.out.println("you lose,,\nRainy days never stay.");
             }else{
                 System.out.println("draw\nIt was a good game.");
             }
         }
     }
 
+    /*ace:
+    * 引数としてint型の変数cardをとる
+    * boolean型の変数ace_changeを作成し、trueに設定する
+    * 引数として持ってきた変数が1の時に、入力待ちの状態にする
+    * 入力された数字が1の時、ace_changeをfalseに変更する
+    * 入力された数字が11の時、ace_changeをtrueに変更する
+    * 戻り値としてace_changeを返す
+    */
 
     public boolean ace(int card) {
         boolean ace_change=true;

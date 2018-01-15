@@ -10,7 +10,7 @@ public class Main {
         String[] deck;
 
         deck = Card.make_cards();
-        deck=rule.Shuffle(deck);//ここまでok
+        deck=rule.Shuffle(deck);
         rule.Rule(deck);
 
         d_hands=rule.deal(d1,d_hands);
