@@ -9,7 +9,9 @@ public class Rule {
     public void Rule(String[] deck){
         this.deck=deck;
     }
-
+    /*Shuffle:
+     *String型配列cardを引数として受け取る。
+     *それを一旦、List型に変換し、shuffleメソッドを呼び出す。*/
     public String[] Shuffle(String[] card) {
         List<String> cards = new LinkedList<>(Arrays.asList(card));
         Collections.shuffle(cards);
@@ -48,8 +50,10 @@ public class Rule {
             if (card==11 || card==12 || card==13){
                 card =10;
             }else if(card==1){
-                if(Global.Ace == true){
+                if(Global.Ace){
                     card = 11;
+                }else if(!Global.Ace) {
+                    card = 1;
                 }
             }
             total+=card;

@@ -22,4 +22,3 @@ public class Main {
         rule.Judge(Global.p_total,Global.d_total);
     }
 }
-
