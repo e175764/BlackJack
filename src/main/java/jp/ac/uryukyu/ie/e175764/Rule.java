@@ -42,15 +42,14 @@ public class Rule {
 
     public int Total(String[] hands) {
         int total=0;
-        boolean ace = true;
         for(int i=0;i<hands.length;i++){
             String hand =hands[i].replaceAll("[^0-9]", "");//手札1枚目(数字データのみ)
             int card=Integer.parseInt(hand);
             if (card==11 || card==12 || card==13){
                 card =10;
             }else if(card==1){
-                if(ace == true){
-                    card = 10;
+                if(Global.Ace == true){
+                    card = 11;
                 }
             }
             total+=card;
@@ -66,13 +65,37 @@ public class Rule {
         d_diff = 21-d_total;
         System.out.println("Dealer's total:"+d_total);
         System.out.println("Player's total:"+p_total);
-        if (d_diff > p_diff){
+        if (p_total>21 && d_total>21){
             System.out.println("you win!\nAs luck would have it.");
-        }else if (p_diff > d_diff){
+        }else if(p_total>21){
             System.out.println("you lose,,\nIs there also such a day.");
+        }else if(d_total>21){
+            System.out.println("you win!\nAs luck would have it.");
         }else{
-            System.out.println("draw\nIt was a good game.");
+            if (d_diff > p_diff){
+                System.out.println("you win!\nAs luck would have it.");
+            }else if (p_diff > d_diff){
+                System.out.println("you lose,,\nIs there also such a day.");
+            }else{
+                System.out.println("draw\nIt was a good game.");
+            }
         }
+    }
+
+
+    public boolean ace(int card) {
+        boolean ace_change=true;
+        if (card == 1) {
+            System.out.println("please　chose  1 or 11.");
+            Scanner scan = new Scanner(System.in);
+            int num = scan.nextInt();
+            if (num == 1) {
+                ace_change = false;
+            } else if (num == 11) {
+                ace_change = true;
+            }
+        }
+        return ace_change;
     }
 
 }

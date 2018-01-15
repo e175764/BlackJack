@@ -14,6 +14,7 @@ public class Player {
         hands = cards.toArray(new String[cards.size()]);
         value = rule.Total(hands);
         draw(hands,value);
+
     }
 
     public void draw(String[] hands,int value) {
@@ -22,6 +23,11 @@ public class Player {
         if (hands.length >= 2) {
             System.out.println("Your hands:" + Arrays.toString(hands));
             String s = String.valueOf(value);
+            for(int i=0;i<hands.length;i++){
+                String hand =hands[i].replaceAll("[^0-9]", "");//手札1枚目(数字データのみ)
+                int card=Integer.parseInt(hand);
+                Global.Ace=rule.ace(card);
+            }
             g.p_total=value;
             if (num == 1) {
                 System.out.println("Total value of your hands:" + s);
